@@ -1,0 +1,13 @@
+* Exercises from FullStackOpen.
+** Repo Structure
+#+BEGIN_SRC
+  part 0
+  part 1
+      courseinfo
+      unicafe
+      anecdotes
+  part 2
+      courseinfo
+      phonebook
+      countries
+#+END_SRC
