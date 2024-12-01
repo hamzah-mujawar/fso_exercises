@@ -1,0 +1,36 @@
+#+BEGIN_SRC mermaid :file 0.4_new_note_diagram.png
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '13px', 'fontFamily': 'Inter'}}}%%
+  sequenceDiagram
+      participant browser
+      participant server
+
+      Note left of browser: user inputs "test" in text box and presses enter
+
+      browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+      Note right of server:  Our user input "test" is stored into the array of notes 
+      activate server
+      server-->>browser: URL redirect to /exampleapp/notes
+      deactivate server
+
+      browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+      activate server
+      server-->>browser: the css file
+      deactivate server
+
+      browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+      activate server
+      server-->>browser: the javascript file
+      deactivate server
+
+      Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+      browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+      activate server
+      server-->>browser: [{ "content": "HTML is easy", "date": "2024-12-01" }, ]
+      deactivate server
+
+      Note right of browser: The browser executes the callback function that renders the notes
+#+END_SRC
+
+#+RESULTS:
+[[file:0.4_new_note_diagram.png]]
