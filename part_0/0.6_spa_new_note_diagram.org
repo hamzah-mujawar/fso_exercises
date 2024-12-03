@@ -1,0 +1,21 @@
+#+BEGIN_SRC mermaid :file spa_new_note.png
+  sequenceDiagram
+      %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '13px', 'fontFamily': 'Inter'}}}%%
+      participant browser
+      participant server
+
+      Note right of browser: User inputs text and clicks the "Save button"
+      Note right of browser: The user input is turned into a json payload which will be sent to the server
+
+      browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+      activate server
+      Note left of server: the user data is added to the array of notes
+      server-->>browser: 201 Created {[ message: "note created"]}
+      deactivate server
+
+      
+      Note right of browser: The browser executes the callback function that renders the notes
+#+END_SRC
+
+#+RESULTS:
+[[file:spa_new_note.png]]
