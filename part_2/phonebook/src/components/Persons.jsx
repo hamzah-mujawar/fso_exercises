@@ -1,19 +1,8 @@
-const Persons = ( { newFilter, persons, filteredUsers }) => (
-    <ul>
-	{
-	    newFilter === ""
-		? persons.map( (person) => (
-		    <li key={person.name}>
-			{person.name} {' '} {person.number}
-		    </li>
-		))
-		: filteredUsers.map( (person) => (
-		    <li key={person.name}>
-			{person.name} {' '} {person.number}
-		    </li>
-		))
-	}
-    </ul>
+const Persons = ( { persons, deletePerson }) => (
+    <li>
+	{persons.name} {persons.number}
+	<button onClick={deletePerson}>delete</button>
+    </li>
 )
 
 export default Persons
