@@ -1,11 +1,11 @@
 import CountryInfo from './CountryInfo'
 import Countries from './Countries'
 
-const Display = ({ filteredCountries, handleShowCountry }) => {
+const Display = ({ filteredCountries, handleShowCountry, weatherCountry }) => {
     if (filteredCountries.length === 1){
 	return(
 	    filteredCountries.map((country) =>
-		<CountryInfo key={country.cca2} country={country} />
+		<CountryInfo key={country.cca2} country={country} weatherCountry={weatherCountry} />
 	    )
 	)
     } else if(filteredCountries.length < 10) {
