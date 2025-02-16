@@ -7,7 +7,8 @@ const App = () => {
     const [countries, setCountry] = useState([])
     const [filteredCountries, setFilteredCountries] = useState(countries)
     const [countrySearch, setCountrySearch] = useState('')
-
+    const [weatherCountry, setWeatherCountry] = useState([])
+    
     useEffect(() => {
 	countryService
 	    .getAllCountries()
@@ -15,6 +16,19 @@ const App = () => {
 		setCountry(initialCountries)
 	    })
     }, [])
+    
+    useEffect(() => {
+	if(filteredCountries.length === 1){
+	    const country = filteredCountries[0]
+	    if(country.latlng){
+		countryService
+		    .getWeather(country.latlng[0], country.latlng[1])
+		    .then(returnedWeather => {
+			setWeatherCountry(returnedWeather)
+		    })
+	    }
+	}
+    }, [countrySearch], [filteredCountries])
     
     const handleFormChangeCountry = (event) => {
 	const filterValue = event.target.value
@@ -25,11 +39,15 @@ const App = () => {
 	)
 	setFilteredCountries(filteredItems)
     }
-    
+
+    const handleShowCountry = (country) => {
+	setFilteredCountries([country])
+    }
+
     return(
 	<div>
 	    <CountryForm countrySearch={countrySearch} handleFormChangeCountry={handleFormChangeCountry} />
-	    <Display filteredCountries={filteredCountries} />
+	    <Display filteredCountries={filteredCountries} handleShowCountry={handleShowCountry} />
 	</div>
     )
 }

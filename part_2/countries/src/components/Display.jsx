@@ -1,7 +1,7 @@
 import CountryInfo from './CountryInfo'
 import Countries from './Countries'
 
-const Display = ({ filteredCountries }) => {
+const Display = ({ filteredCountries, handleShowCountry }) => {
     if (filteredCountries.length === 1){
 	return(
 	    filteredCountries.map((country) =>
@@ -11,7 +11,9 @@ const Display = ({ filteredCountries }) => {
     } else if(filteredCountries.length < 10) {
 	return(
 	    filteredCountries.map((country) => (
-		<Countries key={country.name.common} countries={country.name.common} />
+		<div key={country.name.common}>
+		    <Countries key={country.name.common} countries={country} handleShowCountry={handleShowCountry} />
+		</div>
 	    ))
 	)
     } else{
