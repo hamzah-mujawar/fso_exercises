@@ -3,7 +3,7 @@ const app = express()
 
 app.use(express.json())
 
-const persons = [
+let persons = [
     { 
       "id": "1",
       "name": "Arto Hellas", 
@@ -36,6 +36,42 @@ app.get('/info', (req, res) => {
     res.send(`<p>Phonebook has info for ${count} people</p><p>${date}</p>`)
 })
 
+app.get('/api/persons/:id', (req, res) => {
+    const id = req.params.id
+    const person = persons.find(person => person.id === id)
+
+    if(person)
+	res.json(person)
+    else
+	res.status(404).end()
+})
+
+app.delete('/api/persons/:id', (req, res) => {
+    const id = req.params.id
+    persons = persons.filter(person => person.id !== id)
+
+    res.status(204).end()
+})
+
+const generateID = () => {
+
+    const max = 10000000 //this should be a big enough number such that our ids are random
+    return String(Math.floor(Math.random() * max))
+}
+
+app.post('/api/persons', (req, res) => {
+    const body = req.body
+
+    const person = {
+	number: body.number,
+	name: body.name,
+	id: generateID(),
+    }
+
+    persons = persons.concat(person)
+
+    res.json(person)
+})
 
 const PORT = 3001
 app.listen(PORT, () => {
