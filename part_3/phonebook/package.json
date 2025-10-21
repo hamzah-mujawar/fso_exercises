@@ -7,12 +7,15 @@
     "type": "commonjs",
     "main": "index.js",
     "scripts": {
+        "build:ui": "rm -rf dist && cd ../../part_2/phonebook/ && npm run build && cp -r dist ../../part_3/phonebook",
+        "deploy": "fly deploy",
+        "deploy:full": "npm run build:ui && npm run deploy",
+        "logs:prod": "fly logs",
         "start": "node index.js",
         "dev": "node --watch index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "cors": "^2.8.5",
         "express": "^5.1.0",
         "morgan": "^1.10.1"
     },
