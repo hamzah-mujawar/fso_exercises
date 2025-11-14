@@ -28,7 +28,7 @@ app.get('/api/persons', (req, res, next) => {
 app.get('/info', (req, res, next) => {
 	Person.find({}).then(person => {
 		const count = person.length
-		const date = new Date;
+		const date = new Date
 		res.send(`<p>Phonebook has info for ${count} people</p><p>${date}</p>`)
 	})
 		.catch(error => next(error))
